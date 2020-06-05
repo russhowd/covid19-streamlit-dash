@@ -245,7 +245,7 @@ def main():
 
        
         # Create a pydeck map object that will update as we change our slider
-        st.write(pdk.Deck(
+        st.pydeck_chart(pdk.Deck(
                      map_style="mapbox://styles/mapbox/dark-v10",
                      mapbox_key = 'pk.eyJ1IjoicnVzc2hvd2QiLCJhIjoiY2puOTJpNmh5MHZjdTNwbXNxdDlyYTdmciJ9.C_p9lRLmh_J50bLDr2eScA',
                      tooltip={    
@@ -278,6 +278,40 @@ def main():
                             material=True),
                     ],
                 ))
+        
+        #st.write(pdk.Deck(
+        #             map_style="mapbox://styles/mapbox/dark-v10",
+        #             mapbox_key = 'pk.eyJ1IjoicnVzc2hvd2QiLCJhIjoiY2puOTJpNmh5MHZjdTNwbXNxdDlyYTdmciJ9.C_p9lRLmh_J50bLDr2eScA',
+        #             tooltip={    
+        #                    'html': '<b> {Combined_Key} </b> <br> <b>Deaths:</b> {value} ',
+        #                    'style': {
+        #                            'color': 'white'
+        #                            }
+        #                    },
+        #             initial_view_state={
+        #            "latitude": 36.6,
+        #            "longitude": -79,
+        #            "zoom": 4,
+        #            "pitch": 70,
+        #            "bearing": -37,
+        #        },
+        #        layers=[
+        #            pdk.Layer(
+        #               'ColumnLayer',
+        #                data=us_deaths,
+        #                    get_position=["Long_", "Lat"],
+        #                    get_elevation="value / 2",
+        #                    elevation_scale=500,
+        #                    #elevation_range=[0, 200],
+        #                    radius=7000,
+        #                    get_fill_color='Color',
+        #                    #get_fill_color=['value / 2.5', 255, 255],
+        #                    #get_fill_color = ["price_per_unit_area / 10", 0, 140, 140],
+        #                    auto_highlight=True,
+        #                    pickable=True,
+        #                    material=True),
+        #            ],
+        #        ))
 
 
 
