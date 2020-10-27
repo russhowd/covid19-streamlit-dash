@@ -44,17 +44,17 @@ def tidy_death_data(df,group):
     # calculate daily change in deaths (raw)
     df_tidy['daily_change'] = df_tidy.sort_values([group,'Days']).groupby(group)['value'].diff()
     # calculate daily change in deaths (%)
-    df_tidy['daily_pct_change'] = df_tidy.sort_values([group,'Days']).groupby(group)['value'].pct_change() * 100
+    #df_tidy['daily_pct_change'] = df_tidy.sort_values([group,'Days']).groupby(group)['value'].pct_change() * 100
     # calculate 7-day rolling average in deaths (raw)
     df_tidy['daily_roll_avg'] = df_tidy.groupby(group)['daily_change'].rolling(7).mean().round().reset_index(0,drop= True)
     # calculate 7-day rolling average in deaths (%)
-    df_tidy['daily_pctchange_roll_avg'] = df_tidy.groupby(group)['daily_pct_change'].rolling(7).mean().round().reset_index(0,drop= True)
+    #df_tidy['daily_pctchange_roll_avg'] = df_tidy.groupby(group)['daily_pct_change'].rolling(7).mean().round().reset_index(0,drop= True)
 
     # Replace the first day (NaN) as zero and missing rolling averages with the value that day
     df_tidy['daily_change'].fillna(0, inplace=True)
-    df_tidy['daily_pct_change'].fillna(0, inplace=True)
+    #df_tidy['daily_pct_change'].fillna(0, inplace=True)
     df_tidy['daily_roll_avg'].fillna(df_tidy['daily_change'], inplace=True)
-    df_tidy['daily_pctchange_roll_avg'].fillna(df_tidy['daily_pct_change'], inplace=True)
+    #df_tidy['daily_pctchange_roll_avg'].fillna(df_tidy['daily_pct_change'], inplace=True)
     return df_tidy
 
 # Function to be used for plotting the global deaths data with a line graph
@@ -64,7 +64,7 @@ def global_plot_create(data, x, y, title, xaxis, yaxis):
                       xaxis_title= xaxis, 
                       yaxis_title = yaxis,
                       legend_title_text='Countries',
-                      yaxis_type="log", 
+                      #yaxis_type="log", 
                       yaxis_tickformat = 'f',
                       xaxis_gridcolor = 'LightBlue',
                       yaxis_gridcolor = 'LightBlue',
@@ -79,7 +79,7 @@ def us_plot_create(data, x, y, title, xaxis, yaxis):
                       xaxis_title= xaxis, 
                       yaxis_title = yaxis,
                       legend_title_text='States',
-                      yaxis_type="log", 
+                      #yaxis_type="log", 
                       yaxis_tickformat = 'f',
                       xaxis_gridcolor = 'LightBlue',
                       yaxis_gridcolor = 'LightBlue',
@@ -123,7 +123,7 @@ def main():
         data_plot.reset_index(inplace=True)
 
         # Select the variable to be plotted
-        cols = ['Total Confirmed Deaths', 'Deaths per Day','Daily Percentage Change']
+        cols = ['Total Confirmed Deaths', 'Deaths per Day']
         variable = st.selectbox('Select variable to display', cols)
 
         if variable == 'Total Confirmed Deaths':
@@ -144,16 +144,16 @@ def main():
                         yaxis = 'Confirmed Daily Deaths')
             st.plotly_chart(fig)
         else:
-            fig2=global_plot_create(data = data_plot, 
-                        x = 'Days',
-                        y = 'daily_pctchange_roll_avg',
-                        title = 'Daily Confirmed Deaths Growth (%)',
-                        xaxis = 'Number of days since 10th death',
-                        yaxis = 'Rate Change (%)')
+            #fig2=global_plot_create(data = data_plot, 
+                        #x = 'Days',
+                        #y = 'daily_pctchange_roll_avg',
+                        #title = 'Daily Confirmed Deaths Growth (%)',
+                        #xaxis = 'Number of days since 10th death',
+                        #yaxis = 'Rate Change (%)')
             # Daily growth plot doesn't need a logged axis, so update the plot accordingly
-            fig2.update_layout(yaxis_type="linear")
+            #fig2.update_layout(yaxis_type="linear")
 
-            st.plotly_chart(fig2)
+            #st.plotly_chart(fig2)
 
 
     elif page == 'US':
@@ -180,7 +180,7 @@ def main():
         data_plot.reset_index(inplace=True)
 
         # Select the variable to be plotted
-        cols = ['Total Confirmed Deaths', 'Deaths per Day','Daily Percentage Change']
+        cols = ['Total Confirmed Deaths', 'Deaths per Day']
         variable = st.selectbox('Select variable to display', cols)
 
         if variable == 'Total Confirmed Deaths':
@@ -201,16 +201,16 @@ def main():
                         yaxis = 'Confirmed Daily Deaths')
             st.plotly_chart(fig)
         else:
-            fig2=us_plot_create(data = data_plot, 
-                        x = 'Days',
-                        y = 'daily_pctchange_roll_avg',
-                        title = 'Daily Confirmed Deaths Growth (%)',
-                        xaxis = 'Number of days since 10th death',
-                        yaxis = 'Rate Change (%)')
+            #fig2=us_plot_create(data = data_plot, 
+                        #x = 'Days',
+                        #y = 'daily_pctchange_roll_avg',
+                        #title = 'Daily Confirmed Deaths Growth (%)',
+                        #xaxis = 'Number of days since 10th death',
+                        #yaxis = 'Rate Change (%)')
             # Daily growth plot doesn't need a logged axis, so update the plot accordingly
-            fig2.update_layout(yaxis_type="linear")
+            #fig2.update_layout(yaxis_type="linear")
 
-            st.plotly_chart(fig2)
+            #st.plotly_chart(fig2)
 
     else:
         st.title('County Map')
