@@ -143,7 +143,7 @@ def main():
                         xaxis = 'Number of days since 10th death',
                         yaxis = 'Confirmed Daily Deaths')
             st.plotly_chart(fig)
-        else:
+        #else:
             #fig2=global_plot_create(data = data_plot, 
                         #x = 'Days',
                         #y = 'daily_pctchange_roll_avg',
@@ -200,7 +200,7 @@ def main():
                         xaxis = 'Number of days since 10th death',
                         yaxis = 'Confirmed Daily Deaths')
             st.plotly_chart(fig)
-        else:
+        #else:
             #fig2=us_plot_create(data = data_plot, 
                         #x = 'Days',
                         #y = 'daily_pctchange_roll_avg',
